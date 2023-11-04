@@ -40,7 +40,6 @@ void Menu()
 
     switch (opcaoMenuN)
     {
-        //interpolãção de string
         case 1:
             RegistrarBandas();
             break;
@@ -51,11 +50,12 @@ void Menu()
             AvaliarBanda();
             break;
         case 4:
-            Console.WriteLine($"Você escolheu a opção: {opcaoMenuN}");
+            MediaAvaliacao();
             break;
         case 0:
-            Console.WriteLine("Até breve.");
+            Console.WriteLine("Até breve!");
             break;
+            
         default:
             Console.WriteLine("Digite uma opção válida");
             break;
@@ -124,5 +124,27 @@ void AvaliarBanda()
         Menu();
     }
 }
+void MediaAvaliacao(){
+    Console.Clear();
+    ExibirTituloOpcoes("Média de avaliação das bandas");
+    Console.Write("Qual banda você quer avaliar: ");
+    string escolhaBanda =  Console.ReadLine()!;
 
+    if (bandasRegistradas.ContainsKey(escolhaBanda)){
+
+        double mediaBanda = bandasRegistradas[escolhaBanda].Average();
+        Console.WriteLine($"A média de avaliação da banda {escolhaBanda} é {mediaBanda}.");
+        Console.WriteLine("Aperte uma tecla para voltar ao menu principal");
+        Console.ReadKey();
+        Menu();
+    }
+    else{
+
+         Console.WriteLine($"A banda {escolhaBanda} não foi encontrada. Registre-a para poder avaliar.");
+        Console.WriteLine("Aperte uma tecla para voltar ao menu principal");
+        Console.ReadKey();
+        Menu();
+    }
+
+}
 Menu();
